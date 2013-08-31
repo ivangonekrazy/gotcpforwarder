@@ -48,13 +48,13 @@ func statusStatus(rCh <-chan int, fCh <-chan int, tickCh <-chan time.Time) {
     ok := true
     for ok {
         select {
-            case rBytes, ok := <-rCh:
+            case rBytes, _ := <-rCh:
                 recvBytes += rBytes
                 recvMsgs += 1
-            case fBytes, ok := <-fCh:
+            case fBytes, _ := <-fCh:
                 fwdBytes += fBytes
                 fwdMsgs += 1
-            case tick, ok := <-tickCh:
+            case tick, _ := <-tickCh:
                 fmt.Println(tick)
                 fmt.Println("\tmessages recv:", recvMsgs, "\tbytes recv:", recvBytes)
                 fmt.Println("\tmessages forwarded:", fwdMsgs, "\tbytes forwarded:", fwdBytes)
